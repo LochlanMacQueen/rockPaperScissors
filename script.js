@@ -18,53 +18,149 @@ function getComputerChoice() {
         return 'scissors';
     }
 }
-function getHumanChoice() {
-    let choice = prompt('Rock, Paper, or Scissors');
-    return choice.toLowerCase();
-}
 let humanScore = 0;
 let computerScore = 0;
-function playRound(humanChoice, computerChoice) {
-    if(humanChoice === 'rock' && computerChoice === 'paper') {
+// logic for ui
+let computerChoice;
+const btn = document.querySelector("#Roc");
+btn.addEventListener('click', () => {
+    computerChoice = getComputerChoice();
+    if(computerChoice === 'paper') {
         computerScore++;
         console.log('Rock loses to paper, computer wins this round!');
+        outcome = 'Rock loses to paper, computer wins this round!';
+        result.textContent = `${outcome}`;
+        hCreate.textContent = `Human Score: ${humanScore}`;
+        cCreate.textContent = `Computer Score: ${computerScore}`;
 }
-    else if(humanChoice === 'rock' && computerChoice === 'scissors') {
+    else if(computerChoice === 'scissors') {
         humanScore++;
         console.log('Rock beats scissors, you win this round!');
+        outcome = 'Rock beats scissors, you win this round!';
+        result.textContent = `${outcome}`;
+        hCreate.textContent = `Human Score: ${humanScore}`;
+        cCreate.textContent = `Computer Score: ${computerScore}`;
 }
-    else if(humanChoice === 'rock' && computerChoice === 'rock'){
+    else if(computerChoice === 'rock'){
         console.log('It\'s a tie!');
+        outcome = "It's a tie!";
+        result.textContent = `${outcome}`;
+        hCreate.textContent = `Human Score: ${humanScore}`;
+        cCreate.textContent = `Computer Score: ${computerScore}`;
     }
-    else if(humanChoice === 'paper' && computerChoice === 'rock'){
+    if(computerScore === 5){
+        winner.textContent = "Computer Wins!"
+        divWin.appendChild(winner);
+        computerScore = 0;
+        humanScore = 0;
+    }
+    if(humanScore === 5) {
+        winner.textContent = "Human Wins!"
+        divWin.appendChild(winner);
+        computerScore = 0;
+        humanScore = 0;
+    }
+})
+
+
+const btn2 = document.querySelector("#Pap");
+btn2.addEventListener('click', () => {
+    computerChoice = getComputerChoice();
+    if(computerChoice === 'rock'){
         humanScore++;
         console.log('Paper beats rock, you win this round!');
+        outcome = 'Paper beats rock, you win this round!';
+        result.textContent = `${outcome}`;
+        hCreate.textContent = `Human Score: ${humanScore}`;
+        cCreate.textContent = `Computer Score: ${computerScore}`;
     }
-    else if(humanChoice === 'paper' && computerChoice === 'paper'){
-        console.log('Paper ties paper');
+    else if(computerChoice === 'paper'){
+        console.log('It\'s a tie!');
+        outcome = "It's a tie!";
+        result.textContent = `${outcome}`;
+        hCreate.textContent = `Human Score: ${humanScore}`;
+        cCreate.textContent = `Computer Score: ${computerScore}`;
     }
-    else if(humanChoice === 'paper' && computerChoice === 'scissors'){
+    else if(computerChoice === 'scissors'){
         computerScore++;
         console.log('Scissors cut paper, computer wins this round!');
+        outcome = 'Scissors cut paper, computer wins this round!'
+        result.textContent = `${outcome}`;
+        hCreate.textContent = `Human Score: ${humanScore}`;
+        cCreate.textContent = `Computer Score: ${computerScore}`;
     }
-    else if(humanChoice === 'scissors' && computerChoice === 'rock'){
+    if(computerScore === 5){
+        winner.textContent = "Computer Wins!"
+        divWin.appendChild(winner);
+        computerScore = 0;
+        humanScore = 0;
+    }
+    if(humanScore === 5) {
+        winner.textContent = "Human Wins!"
+        divWin.appendChild(winner);
+        computerScore = 0;
+        humanScore = 0;
+    }
+})
+
+
+const btn3 = document.querySelector("#Sci");
+btn3.addEventListener('click', () => { //When clicked, outcome is selected and logged
+    computerChoice = getComputerChoice();
+    if(computerChoice === 'rock'){
         computerScore++;
         console.log('Rock loses to scissors, computer wins this round!');
+        outcome = "Rock loses to scissors, computer wins this round!";
+        result.textContent = `${outcome}`;
+        hCreate.textContent = `Human Score: ${humanScore}`;
+        cCreate.textContent = `Computer Score: ${computerScore}`;
     }
-    else if(humanChoice === 'scissors' && computerChoice === 'paper'){
+    else if(computerChoice === 'paper'){
         humanScore++;
         console.log('Scissors cut paper, you win this round!');
+        outcome = "Scissors cut paper, you win this round!";
+        result.textContent = `${outcome}`;
+        hCreate.textContent = `Human Score: ${humanScore}`;
+        cCreate.textContent = `Computer Score: ${computerScore}`;
     }
     else {
         console.log('scissors ties scissors');
+        outcome = "It's a tie!";
+        result.textContent = `${outcome}`;
+        hCreate.textContent = `Human Score: ${humanScore}`;
+        cCreate.textContent = `Computer Score: ${computerScore}`;
     }
-}
-    function playGame() {
-        for(let i = 0; i < 5; i++) {
-            let humanChoice = getHumanChoice();
-            let computerChoice = getComputerChoice();
-            playRound(humanChoice, computerChoice);
-        }
-        console.log(`Final score: Human: ${humanScore}, Computer: ${computerScore}`);
+    if(computerScore === 5){
+        winner.textContent = "Computer Wins!"
+        divWin.appendChild(winner);
+        computerScore = 0;
+        humanScore = 0;
     }
-    playGame();
+    if(humanScore === 5) {
+        winner.textContent = "Human Wins!"
+        divWin.appendChild(winner);
+        computerScore = 0;
+        humanScore = 0;
+    }
+});
+let outcome = "";
+const cont = document.querySelector("#container");
+const result = document.createElement('h1');
+result.classList.add('result');
+result.textContent = outcome;
+cont.appendChild(result); // print result on screen
+
+const hScore = document.querySelector("#scores");
+const cScore = document.querySelector("#scores")
+const hCreate = document.createElement("h2");
+const cCreate = document.createElement("h2");
+hCreate.classList.add("score");
+cCreate.classList.add("score");
+hScore.appendChild(hCreate);
+cScore.appendChild(cCreate);
+// decide winner
+const divWin = document.querySelector("#container");
+const winner = document.createElement("h1");
+
+
+// give gray background to the outcome text when a button is clicked
